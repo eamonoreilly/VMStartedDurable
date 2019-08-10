@@ -71,7 +71,7 @@ namespace Microsoft.Demo.VMStarted
         
         [FunctionName("VMStartedGet")]
         public static async Task<IActionResult> VMStartedGet(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post")]HttpRequest req,
+            [HttpTrigger(AuthorizationLevel.Function, "get", "post")]HttpRequest req,
             [OrchestrationClient] IDurableOrchestrationClient starter,
             ILogger log)
         {
