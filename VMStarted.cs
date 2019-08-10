@@ -55,7 +55,7 @@ namespace Microsoft.Demo.VMStarted
             public int CurrentValue { get; set; }
             public void Set(int hour)
             {
-                if (this.CurrentValue > hour)
+                if (this.CurrentValue > hour  || this.CurrentValue == 0)
                 {
                     this.CurrentValue = hour;
                 }
