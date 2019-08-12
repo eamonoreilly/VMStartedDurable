@@ -24,7 +24,7 @@ namespace Microsoft.Demo.VMStarted
             System.DateTime currentTime = System.DateTime.Now;
 
             VMInfo VMInput;           
-            VMInput.VMId = VMId.Replace('/','-'); // Replace / escape character
+            VMInput.VMId = VMId.Replace('/','-').ToLower(); // Replace / escape character
             VMInput.Hour = currentTime.Hour;
             VMInput.Action = "Set";
       
@@ -86,7 +86,7 @@ namespace Microsoft.Demo.VMStarted
             }
 
             // Return value of VM entity
-            EntityId id = new EntityId("VM",VMId.Replace('/','-')); // Replace escape / character
+            EntityId id = new EntityId("VM",VMId.Replace('/','-').ToLower()); // Replace escape / character
             var response = await starter.ReadEntityStateAsync<VM>(id);
                         return response.EntityExists
                         ? (ActionResult)new OkObjectResult(response)
