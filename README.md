@@ -3,10 +3,11 @@
     <img src="http://armviz.io/visualizebutton.png"/>
 </a>
 
-# Sample to start / stop VMs on a schedule based on a COST Tag. 
+# Sample to identify when a virtual machine was first started in Azure
+
+It uses event grid to get notified of the Microsoft.Compute/virtualMachines/start/action and then call this durable function (VMStarted_EventGrid) to update the start time if it is newer than the existing time. 
+
+It also exposes the retrieval of the start time through the VMStartedGet function. It is designed to be called from an external function like the StartVMOnTimer  in https://github.com/eamonoreilly/AddTagToNewResources
 
 ## Requirements
-* You need to make sure the COST tag already exists in the subscription before deploying.
-* You may need to redploy the template a second time due to the timing of the managed identity getting created in Azure AD. Running a second time should resovle this issue.
-* Any VM created in the same resource group as this function app will automatically have the COST tag added and will shutdown / restart based on the time set
-
+* Only VMs created in the resource group of this deployment will trigger the Azure function from event grid.
